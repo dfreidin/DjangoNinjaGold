@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Ninja Money</title>
+        {% load static %}
+        <link rel='stylesheet' href='{% static "ninja_gold/css/style.css" %}'>
+        <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+        <script>
+            $(document).ready(function(){
+                el = document.getElementById("activities")
+                el.scrollTop = el.scrollHeight;
+            });
+        </script>
+    </head>
+    <body>
+        <h3>Your Gold: {{request.session.gold}}</h3>
+        <div class="action">
+            <h2>Farm</h2>
+            <h3>(earns 10-20 gold)</h3>
+            <button onclick="window.location.href='process_money/farm'">Find Gold!</button>
+        </div>
+        <div class="action">
+            <h2>Cave</h2>
+            <h3>(earns 5-10 gold)</h3>
+            <button onclick="window.location.href='process_money/cave'">Find Gold!</button>
+        </div>
+        <div class="action">
+            <h2>House</h2>
+            <h3>(earns 2-5 gold)</h3>
+            <button onclick="window.location.href='process_money/house'">Find Gold!</button>
+        </div>
+        <div class="action">
+            <h2>Casino</h2>
+            <h3>(earns/loses 0-50 gold)</h3>
+            <button onclick="window.location.href='process_money/casino'">Find Gold!</button>
+        </div>
+        <p>Activities:</p>
+        <div id="activities">
+            {% for a in request.session.activities %}
+                <p class="{{a.class}}">{{a.activity}}</p>
+            {% endfor %}
+        </div>
+        <p><button onclick="window.location.href='reset'">Reset Gold</button></p>
+    </body>
+</html>
